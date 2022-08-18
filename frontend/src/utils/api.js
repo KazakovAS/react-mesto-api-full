@@ -1,69 +1,92 @@
+import DOMAIN from './constants';
+
 class Api {
-  constructor({ baseUrl, headers }) {
-    this._headers = headers;
-    this._baseUrl = baseUrl;
+  constructor(domain) {
+    this._domain = domain;
   }
 
   getProfile() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+    return fetch(`https://${this._domain}/users/me`, {
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020'
+      }
     })
       .then(res => this._handleError(res))
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
+    return fetch(`https://${this._domain}/cards`, {
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020'
+      }
     })
       .then(res => this._handleError(res))
   }
 
   editProfile(name, about) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`https://${this._domain}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ name, about })
     })
       .then(res => this._handleError(res))
   }
 
   addCard(name, link) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`https://${this._domain}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ name, link })
     })
       .then(res => this._handleError(res))
   }
 
   deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
+    return fetch(`https://${this._domain}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        'Content-Type': 'application/json'
+      }
     })
       .then(res => this._handleError(res))
   }
 
   addLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return fetch(`https://${this._domain}/cards/${id}/likes`, {
       method: "PUT",
-      headers: this._headers
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        'Content-Type': 'application/json'
+      }
     })
       .then(res => this._handleError(res))
   }
 
   deleteLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return fetch(`https://${this._domain}/cards/${id}/likes`, {
       method: "DELETE",
-      headers: this._headers
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        'Content-Type': 'application/json'
+      }
     })
       .then(res => this._handleError(res))
   }
 
   editAvatar(avatar) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`https://${this._domain}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ avatar })
     })
       .then(res => this._handleError(res))
@@ -74,12 +97,6 @@ class Api {
   }
 }
 
-const api = new Api({
-  baseUrl: 'https://api.lerush.students.nomoredomains.sbs',
-  headers: {
-    authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
-    'Content-Type': 'application/json'
-  }
-});
+const api = new Api(DOMAIN);
 
 export default api;
