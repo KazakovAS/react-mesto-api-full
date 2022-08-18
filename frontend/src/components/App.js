@@ -147,7 +147,7 @@ function App() {
   function handleSignOutClick() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
-    history.push('/sign-in');
+    history.push('/signin');
   }
 
   function handleTokenCheck() {
@@ -180,7 +180,7 @@ function App() {
           <Header onSignOut={handleSignOutClick} />
 
           <main className="content">
-            <Link to="/sign-up"></Link>
+            <Link to="/signup"></Link>
             <Switch>
               <ProtectedRoute
                 exact
@@ -196,16 +196,16 @@ function App() {
                 onCardDelete={handleDeleteClick}
               />
 
-              <Route path="/sign-up">
+              <Route path="/signup">
                 <Register onRegister={handleRegisterSubmit} />
               </Route>
 
-              <Route path="/sign-in">
+              <Route path="/signin">
                 <Login onLogin={handleLoginSubmit} />
               </Route>
 
               <Route>
-                <Redirect to={`${loggedIn ? '/' : '/sign-in'}`} />
+                <Redirect to={`${loggedIn ? '/' : '/signin'}`} />
               </Route>
 
               <Route path="*">

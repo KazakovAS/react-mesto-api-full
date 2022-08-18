@@ -11,11 +11,11 @@ function Header(props) {
 
   const headerLink = (
     <Switch>
-      <Route path="/sign-in">
-        <Link to="/sign-up" className="link header__link">Регистрация</Link>
+      <Route path="/signin">
+        <Link to="/signup" className="link header__link">Регистрация</Link>
       </Route>
-      <Route path="/sign-up">
-        <Link to="/sign-in" className="link header__link">Войти</Link>
+      <Route path="/signup">
+        <Link to="/signin" className="link header__link">Войти</Link>
       </Route>
     </Switch>
   );
