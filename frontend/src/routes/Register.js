@@ -59,7 +59,7 @@ function Register(props) {
         <span className="form__field-error"></span>
       </label>
       <button className="button button_color_white form__submit form__submit_place_authorization">Зарегистрироваться</button>
-      <p className="form__action">Уже зарегистрированы? <Link className="link" to="/sign-in">Войти</Link></p>
+      <p className="form__action">Уже зарегистрированы? <Link className="link" to="/signin">Войти</Link></p>
     </form>
   );
 }
