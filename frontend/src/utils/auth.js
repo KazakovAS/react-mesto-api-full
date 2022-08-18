@@ -1,7 +1,8 @@
+import DOMAIN from './constants';
+
 class Auth {
-  constructor({ baseUrl, headers }) {
-    this._headers = headers;
-    this._baseUrl = baseUrl;
+  constructor(domain) {
+    this._domain = domain;
   }
 
   _handleError(res) {
@@ -9,18 +10,24 @@ class Auth {
   }
 
   register(email, password) {
-    return fetch(`${this._baseUrl}/signup`, {
+    return fetch(`https://${this._domain}/signup`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ password, email })
     })
       .then(res => this._handleError(res))
   }
 
   authorize(email, password) {
-    return fetch(`${this._baseUrl}/signin`, {
+    return fetch(`https://${this._domain}/signin`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ password, email })
     })
       .then(res => this._handleError(res))
@@ -33,23 +40,19 @@ class Auth {
   }
 
   checkToken(token) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`https://${this._domain}/users/me`, {
       method: 'GET',
       headers: {
-        ...this._headers,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-      }
+      },
     })
       .then(res => this._handleError(res))
       .then(res => res.data)
   }
 }
 
-const auth = new Auth({
-  baseUrl: 'https://api.lerush.students.nomoredomains.sbs',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+const auth = new Auth(DOMAIN);
 
 export default auth;
