@@ -75,7 +75,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-40',
+  baseUrl: 'https://api.lerush.students.nomoredomains.sbs',
   headers: {
     authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
     'Content-Type': 'application/json'
