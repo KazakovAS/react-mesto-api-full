@@ -1,0 +1,14 @@
+.header {
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media (min-width: 1280px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 45px;
+    padding-bottom: 41px;
+  }
+}
