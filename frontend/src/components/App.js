@@ -37,8 +37,8 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       Promise.all([
-        api.getProfile(),
-        api.getInitialCards()
+        api.getProfile(localStorage.getItem("jwt")),
+        api.getInitialCards(localStorage.getItem("jwt"))
       ])
         .then(([data, cards]) => {
           setCards(cards);
@@ -65,7 +65,7 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
-    api.editProfile(name, about)
+    api.editProfile(name, about, localStorage.getItem("jwt"))
       .then(data => {
         setCurrentUser(data);
         closeAllPopups();
@@ -74,7 +74,7 @@ function App() {
   }
 
   function handleUpdateAvatar({avatar}) {
-    api.editAvatar(avatar)
+    api.editAvatar(avatar, localStorage.getItem("jwt"))
       .then(data => {
         setCurrentUser(data);
         closeAllPopups();
@@ -83,9 +83,9 @@ function App() {
   }
 
   function handleLikeClick(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
-    (isLiked ? api.deleteLike(card._id) : api.addLike(card._id))
+    (isLiked ? api.deleteLike(card._id, localStorage.getItem("jwt")) : api.addLike(card._id, localStorage.getItem("jwt")))
       .then(data => {
         setCards((state) => state.map(currentCard => currentCard._id === card._id ? data : currentCard));
       })
@@ -93,7 +93,7 @@ function App() {
   }
 
   function handleDeleteClick(card) {
-    api.deleteCard(card)
+    api.deleteCard(card, localStorage.getItem("jwt"))
       .then(() => {
         setCards(state => state.filter(currentCard => currentCard._id !== card));
         closeAllPopups();
@@ -102,7 +102,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit({ name, link }) {
-    api.addCard(name, link)
+    api.addCard(name, link, localStorage.getItem("jwt"))
       .then(newCard => {
         setCards([newCard, ...cards]);
         closeAllPopups();

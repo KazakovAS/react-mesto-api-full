@@ -8,10 +8,6 @@
     "lint": "eslint ."
   },
   "author": "lerush (https://github.com/KazakovAS/)",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KazakovAS/express-mesto-gha.git"
-  },
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.20.0",

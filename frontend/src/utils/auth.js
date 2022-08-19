@@ -34,6 +34,7 @@ class Auth {
       .then(res => {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
+          localStorage.setItem('email', email);
           return res;
         }
       })
@@ -43,13 +44,13 @@ class Auth {
     return fetch(`https://${this._domain}/users/me`, {
       method: 'GET',
       headers: {
+        authorization: `Bearer ${token}`,
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Content-Type': 'application/json'
       },
     })
       .then(res => this._handleError(res))
-      .then(res => res.data)
+      .then(res => res)
   }
 }
 
