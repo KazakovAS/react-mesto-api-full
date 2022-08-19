@@ -5,29 +5,29 @@ class Api {
     this._domain = domain;
   }
 
-  getProfile() {
+  getProfile(token) {
     return fetch(`https://${this._domain}/users/me`, {
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020'
+        authorization: `Bearer ${token}`,
       }
     })
       .then(res => this._handleError(res))
   }
 
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`https://${this._domain}/cards`, {
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020'
+        authorization: `Bearer ${token}`,
       }
     })
       .then(res => this._handleError(res))
   }
 
-  editProfile(name, about) {
+  editProfile(name, about, token) {
     return fetch(`https://${this._domain}/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ name, about })
@@ -35,11 +35,11 @@ class Api {
       .then(res => this._handleError(res))
   }
 
-  addCard(name, link) {
+  addCard(name, link, token) {
     return fetch(`https://${this._domain}/cards`, {
       method: "POST",
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ name, link })
@@ -47,44 +47,44 @@ class Api {
       .then(res => this._handleError(res))
   }
 
-  deleteCard(id) {
+  deleteCard(id, token) {
     return fetch(`https://${this._domain}/cards/${id}`, {
       method: "DELETE",
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
       .then(res => this._handleError(res))
   }
 
-  addLike(id) {
+  addLike(id, token) {
     return fetch(`https://${this._domain}/cards/${id}/likes`, {
       method: "PUT",
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
       .then(res => this._handleError(res))
   }
 
-  deleteLike(id) {
+  deleteLike(id, token) {
     return fetch(`https://${this._domain}/cards/${id}/likes`, {
       method: "DELETE",
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
       .then(res => this._handleError(res))
   }
 
-  editAvatar(avatar) {
+  editAvatar(avatar, token) {
     return fetch(`https://${this._domain}/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        authorization: 'e9991a6f-eae8-43d4-9748-5d955e306020',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ avatar })
