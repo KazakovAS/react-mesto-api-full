@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build && scp -r ./build/* lerush@84.201.173.181:/home/lerush/react-mesto-api-full/frontend"
+    "deploy": "npm run build && scp -r ./build/* lerush@51.250.85.17:/home/lerush/react-mesto-api-full/frontend"
   },
   "eslintConfig": {
     "extends": [
