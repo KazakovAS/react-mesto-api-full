@@ -4,4 +4,5 @@
 Public IP: 84.201.173.181
 
 Domain: frontend.lerush.students.nomoredomains.sbs
+
 API: api.lerush.students.nomoredomains.sbs
